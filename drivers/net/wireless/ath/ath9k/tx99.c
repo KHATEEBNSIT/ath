@@ -87,7 +87,10 @@ static struct sk_buff *ath9k_build_tx99_skb(struct ath_softc *sc)
 	tx_info->control.vif = sc->tx99_vif;
 	rate->count = 1;
 	if (ah->curchan && IS_CHAN_HT(ah->curchan)) {
+	/* some bug, not start tx packet/xmit if set HT 'iw dev moni0 set channel 36 HT20', just comments it out now */
+#if 0
 		rate->flags |= IEEE80211_TX_RC_MCS;
+#endif
 		if (IS_CHAN_HT40(ah->curchan))
 			rate->flags |= IEEE80211_TX_RC_40_MHZ_WIDTH;
 	}
